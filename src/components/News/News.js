@@ -24,7 +24,6 @@ function News(props) {
   document.title = `${capitaLize(props.category)} - News App`;
 
   const updatenews = async () => {
-    try {
       props.setProgress(15);
       const response = await axios.get(endpointPath(props.country, props.category, page, props.pageSize));
       setLoading(true);
@@ -34,10 +33,6 @@ function News(props) {
       setTotalResults(parsedData.totalResults);
       setLoading(false);
       props.setProgress(100);
-    }
-    catch (error) {
-      console.error(error);
-    }
   };
 
   useEffect(() => {
