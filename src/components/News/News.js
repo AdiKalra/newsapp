@@ -42,7 +42,14 @@ function News(props) {
   }, []);
 
   const fetchMoreData = async () => {
-    const {data} = await axios.get(endpointPath(props.country, props.category, page + 1, props.pageSize));
+    const { data } = await axios.get(
+      endpointPath(props.country, props.category, page + 1, props.pageSize),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     setPage(page + 1);
     setArticles(articles.concat(data.articles));
     setTotalResults(data.totalResults);
