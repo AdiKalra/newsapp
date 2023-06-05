@@ -48,6 +48,7 @@ function News(props) {
         headers: {
           "Content-Type": "application/json",
         },
+        mode:'cors'
       }
     );
     setPage(page + 1);
