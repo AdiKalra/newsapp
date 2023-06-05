@@ -26,6 +26,7 @@ function News(props) {
   const updatenews = async () => {
       props.setProgress(15);
       const response = await axios.get(endpointPath(props.country, props.category, page, props.pageSize));
+      console.log(response)
       setLoading(true);
       props.setProgress(70);
       const parsedData = response.data;
@@ -41,11 +42,10 @@ function News(props) {
   }, []);
 
   const fetchMoreData = async () => {
-    const response = await axios.get(endpointPath(props.country, props.category, page + 1, props.pageSize));
+    const {data} = await axios.get(endpointPath(props.country, props.category, page + 1, props.pageSize));
     setPage(page + 1);
-    const parsedData = response.data;
-    setArticles(articles.concat(parsedData.articles));
-    setTotalResults(parsedData.totalResults);
+    setArticles(articles.concat(data.articles));
+    setTotalResults(data.totalResults);
   };
 
   return (
@@ -98,7 +98,7 @@ function News(props) {
 }
 
 News.defaultProps = {
-  country: "us",
+  country: "in",
   pageSize: 7,
   category: "general",
 };
